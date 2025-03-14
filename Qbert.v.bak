@@ -1,0 +1,14 @@
+module Qbert(sync_v, sync_h, r, g, b, clk_50, button1, button2, button3, button4);
+
+output sync_v, sync_h;
+output [0:3] r, g, b;
+input clk_50;
+input button1, button2, button3, button4;
+wire clk_25;
+wire [0:9]Px,Py, centro_x, centro_y;
+wire [0:9]bar1x, bar2x, bar1y, bar2y;
+
+Div_clk25(clk_50, clk_25);
+avance(clk_25,  bar1_arriba, bar1_abajo, bar2_arriba, bar2_abajo, Px, Py, centro_x, centro_y, bar1x, bar2x, bar1y,bar2y);
+pintar(clk_25, Px, Py, centro_x, centro_y, bar1x, bar2x, bar1y,bar2y, sync_h, sync_v, r, g, b);
+endmodule

@@ -1,0 +1,40 @@
+module piramide(clk_25, Px, Py, i, sync_h, sync_v, r, g, b);
+input clk_25;
+input [9:0] Px, Py, i;
+output reg sync_h, sync_v;
+output reg [3:0] r, g, b;
+reg [0:9] Vx=464;
+reg [0:9] Vy=100;
+reg [0:9] Dy=120;
+
+always @(posedge clk_25) begin
+    if (Px >= 0 && Px <= 96) begin
+        sync_h = 1;
+    end else begin
+        sync_h = 0;
+    end
+
+    if (Py >= 0 && Py <= 2) begin 
+        sync_v = 1;
+    end else begin
+        sync_v = 0;
+    end
+	 
+	 if(Py>=Vy && Py <Dy  && Px>=(Vx-i) && Px <=(Vx+i))begin
+		r=0;
+      g=15;
+      b=15;
+      end
+    if(Py>=Dy && Py <(Py+40)  && Px>=(Vx+i) && Px <=(Vx-i))begin
+      r=0;
+	   g=15;
+      b=15;
+      end
+	 else begin
+		r=0;
+		b=0;
+		g=0;
+		end
+		
+	end
+endmodule

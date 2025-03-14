@@ -1,0 +1,32 @@
+module avance(clk_25, Px, Py, i);
+input clk_25;
+output reg [0:9] Px;
+output reg [0:9] Py;
+output reg [0:9] i;
+output reg [0:9] Vx=464;
+output reg [0:9] Vy=100;
+
+
+always @(posedge clk_25) begin
+if(Px<800) begin
+	Px=Px+1;
+		end
+	else
+		begin
+			Px=0;
+			i = i+1;
+			if(Py<525)
+				begin
+					Py=Py+1;
+				end
+			else
+				begin
+					Py=0;
+				end
+		end
+		if(Py<100 || Py>400)
+			begin
+				i=0;
+			end
+end
+endmodule
